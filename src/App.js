@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+// return a rendered Board and if necessary, Card
+// need component for Create Card form?
+// need to append created Card component to Board Array for display?
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <body className='App-body'>
+      <h1 className='Site-name'></h1>
+      <div className='Create-board'></div>
+      <button className='Hide-board'></button>
+      <div className='Create-card'></div>
+      <div className='Display-board'></div>
+      <div className='Card-display'></div>
+    </body>
   );
 }
 
