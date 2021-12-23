@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import PropTypes from 'prop-types';
 import './Form.css';
 
@@ -12,8 +12,9 @@ const NewBoardForm = (props) => {
     alert('Board Created')
 
     props.onBoardSubmit({title: formData.title, owner: formData.owner});
+    setFormData(baseData);
   }
-
+    
   const titleChange = (event) => {
     setFormData({...formData, title: event.target.value});
   }
