@@ -79,7 +79,8 @@ function App() {
       <button className="create-new-card">Create Card</button>
       <NewCard />
       <div className='Display-board'>
-        {addBoardList()}
+        <ol>{addBoardList}</ol>
+        
       </div>
       <div className='Card-display'></div>
     </body>
