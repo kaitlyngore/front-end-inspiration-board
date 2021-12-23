@@ -1,6 +1,7 @@
 .Board {
   padding: 5px 20px;
-  width: 150px;
+  /* width: 150px; */
+  align-self: flex-start;
 }
 
 .Board fieldset {
@@ -9,4 +10,17 @@
 
 .Site-name {
   text-align: center;
+  justify-self: center;
+}
+
+.Display-board-list {
+  padding: 5px 20px;
+  /* width: 150px; */
+  border-style: dotted;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* flex-flow: column; */
 }

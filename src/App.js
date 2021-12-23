@@ -6,7 +6,6 @@ import './App.css';
 // import axios from 'axios';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
-import BoardDisplay from './components/BoardDisplay';
 // require('dotenv').config();
 let url = process.env.REACT_APP_BACKEND_BOARDS;
 const axios = require('axios');
@@ -62,10 +61,6 @@ function App() {
     axios.get(url)
     .then((response) => {
       setBoardList(response.data);
-    })
-    .catch((error) => {
-      setErrorMessage(error.data)
-      console.log(errorMessage);
     });
   }, [boardList])
 
@@ -81,14 +76,15 @@ function App() {
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
-      <NewBoardForm onBoardSubmit = {onNewBoard}/>
+      {boardDisplay? <NewBoardForm onBoardSubmit = {onNewBoard}/>: ""}
       <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
       <div className='Create-card'>Create a New Card</div>
       <button className="create-new-card">Create Card</button>
       <NewCard />
-      <div className='Display-board'>
+      <div className='Display-board-list' onClick={getOneBoard}>
         {addBoardList}
       </div>
+      <div className="board" onClick={getOneBoard}> </div>
       <div className='Card-display'></div>
     </body>
   );
