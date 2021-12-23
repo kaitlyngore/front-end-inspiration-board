@@ -4,6 +4,7 @@ import './App.css';
 // import axios from 'axios';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
+import BoardDisplay from './components/BoardDisplay';
 // require('dotenv').config();
 let url = process.env.REACT_APP_BACKEND_BOARDS;
 const axios = require('axios');
@@ -33,16 +34,16 @@ function App() {
     setBoardDisplay(!boardDisplay);
   }
 // get boards
-  const getBoards = () => {
-    axios.get(url)
-    .then((response) => {
-      setBoardList(response.data);
-    })
-    .catch((error) => {
-      setErrorMessage(error.data)
-      console.log(errorMessage);
-    });
-  }
+  // const getBoards = () => {
+  //   axios.get(url)
+  //   .then((response) => {
+  //     setBoardList(response.data);
+  //   })
+  //   .catch((error) => {
+  //     setErrorMessage(error.data)
+  //     console.log(errorMessage);
+  //   });
+  // }
 // get one board
   const getOneBoard = (board) => {
     axios.get(`${url}/${board.board_id}`)
@@ -56,15 +57,22 @@ function App() {
   }
 // load board list
   useEffect(() => {
-    getBoards();
+    axios.get(url)
+    .then((response) => {
+      setBoardList(response.data);
+    })
+    .catch((error) => {
+      setErrorMessage(error.data)
+      console.log(errorMessage);
+    });
   }, [boardList])
 
 // going through the boards to add them to the list
-  const addBoardList = () => {
-    boardList.map((oneBoard) => {
+  const addBoardList = boardList.map((oneBoard) => {
       return (<Board key={oneBoard.board_id} board={oneBoard} setBoard={getOneBoard}></Board>)
     })
-  }
+  
+ 
 
   return (
     <body className='App-body'>
@@ -77,8 +85,7 @@ function App() {
       <button className="create-new-card">Create Card</button>
       <NewCard />
       <div className='Display-board'>
-        <ol>{addBoardList}</ol>
-        
+        {addBoardList}
       </div>
       <div className='Card-display'></div>
     </body>
