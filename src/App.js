@@ -90,8 +90,6 @@ function App() {
         {addBoardList}
       </div>
       <div className='Card-display'></div>
-      {/* <CardList /> */}
-      {/* <Card /> */}
     </body>
   );
 }
