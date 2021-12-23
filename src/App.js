@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-<<<<<<< HEAD
-import './App.css';
-import axios from 'axios';
-=======
-import NewBoardForm from './components/NewBoardForm';
+import React from 'react';
 import './App.css';
 import Board from './components/NewBoardForm';
->>>>>>> 82ec8f2ba1c27454ae59a5ce89c0c3b0bfe022bd
+import NewCard from './components/NewCardForm';
+import CardList from './components/CardList';
+import Card from './components/Card';
 // return a rendered Board and if necessary, Card
 // need component for Create Card form?
 // need to append created Card component to Board Array for display?
@@ -20,9 +17,13 @@ function App() {
       </header>
       <Board />
       <button className='Hide-board'> Hide Board</button>
-      <div className='Create-card'></div>
+      <div className='Create-card'>Create a New Card</div>
+      <button className="create-new-card">Create Card</button>
+      <NewCard />
       <div className='Display-board'></div>
+      <CardList />
       <div className='Card-display'></div>
+      <Card />
     </body>
   );
 }
