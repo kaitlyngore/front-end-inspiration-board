@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
 import BoardDisplay from './components/BoardDisplay';
@@ -9,16 +9,20 @@ let url = process.env.REACT_APP_BACKEND_BOARDS;
 const axios = require('axios');
 
 function App() {
-const [board, setBoard] = useState({title: '', owner: '', board_id: null});
-const [boardList, setBoardList] = useState([]);
-const [boardDisplay, setBoardDisplay] = useState(true);
+  const [board, setBoard] = useState({title: '', owner: '', board_id: null});
+  const [boardList, setBoardList] = useState([]);
+  const [boardDisplay, setBoardDisplay] = useState(true);
 
-const onBoardSubmit = (newBoard) => {
-  const boardDate = {
-    title: newBoard.title,
-    owner: newBoard.owner
+  const onBoardSubmit = (newBoard) => {
+    const boardDate = {
+      title: newBoard.title,
+      owner: newBoard.owner
+    }
   }
-}
+
+  const addBoardList = () => {
+
+  }
 
   return (
     <body className='App-body'>
