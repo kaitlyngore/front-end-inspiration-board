@@ -1,7 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 
-const BoardDisplay = () => {
+const BoardDisplay = (props) => {
+    return (
+        <ul className="Board-display">
+            {props.onBoardSelect}
+        </ul>
+    )
 
 }
 
