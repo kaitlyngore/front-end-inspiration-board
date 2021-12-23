@@ -3,13 +3,23 @@ import React from 'react';
 // import {React, useState, useEffect} from 'react';
 // import PropTypes from 'prop-types';
 // import NewCard from './NewCardForm';
-// import Card from './Card';
+import Card from './Card';
 
 function CardList(props) {
-    const cards = props.cards;
-    const allCards = cards.map((card) =>
-    <p>{card}</p>
-    );
+    const allCards = props.cards.map((card) => {
+        return (
+            <Card>
+                {/* cardId={card.id} */}
+                cardMessage={card.cardMessage}
+                cardLikes={card.cardLikes}
+            </Card>
+        )
+    })
+    
+    // const cards = props.cards;
+    // const allCards = cards.map((card) =>
+    // <p>{card}</p>
+    // );
     return (
         <div className='all-cards'>
             <p>All Cards: {allCards}</p>
