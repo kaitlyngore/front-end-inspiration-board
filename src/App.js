@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
-import './App.css';
-import Board from './components/NewBoardForm';
+import BoardDisplay from './components/BoardDisplay';
+require('dotenv').config();
+let url = process.env.REACT_APP_BACKEND_BOARDS;
+const axios = require('axios');
 
 function App() {
 const [board, setBoard] = useState({title: '', owner: '', board_id: null});
