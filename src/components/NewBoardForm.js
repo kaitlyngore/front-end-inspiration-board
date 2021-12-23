@@ -6,9 +6,7 @@ const handleSubmit = (event) => {
     event.preventDefault();
     alert('Board Created')
   }
-const Board = () => {
-    const [title, setTitle] = useState(null);
-    const [owner, setOwner] = useState(null);
+const NewBoardForm = () => {
     return (
       <div className="Board">
         <h3>Create Board</h3>
@@ -30,4 +28,4 @@ const Board = () => {
   }
 
 
-export default Board;
+export default NewBoardForm;

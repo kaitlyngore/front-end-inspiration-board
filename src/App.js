@@ -1,22 +1,41 @@
 import React, { useState } from 'react';
-import NewBoardForm from './components/NewBoardForm';
 import './App.css';
-import Board from './components/NewBoardForm';
-// return a rendered Board and if necessary, Card
-// need component for Create Card form?
-// need to append created Card component to Board Array for display?
+import Board from './components/Board';
+import NewBoardForm from './components/NewBoardForm';
+import BoardDisplay from './components/BoardDisplay';
+require('dotenv').config();
+let url = process.env.REACT_APP_BACKEND_BOARDS;
+const axios = require('axios');
+
+// need to create states for individual board handling
+// need to create states for multiple board handling
+// create state to handle display of boards
 
 function App() {
+const [board, setBoard] = useState({title: '', owner: '', board_id: null});
+const [boardList, setBoardList] = useState([]);
+const [boardDisplay, setBoardDisplay] = useState(true);
+
+const onBoardSubmit = (newBoard) => {
+  const boardDate = {
+    title: newBoard.title,
+    owner: newBoard.owner
+  }
+}
 
   return (
     <body className='App-body'>
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
-      <Board />
+      <NewBoardForm onBoardSubmit = {onBoardSubmit}/>
       <button className='Hide-board'> Hide Board</button>
-      <div className='Create-card'></div>
-      <div className='Display-board'></div>
+      <div className='Create-card'>
+
+      </div>
+      <div className='Display-board'>
+        <BoardDisplay onBoardSelect={boardDisplay}/>
+      </div>
       <div className='Card-display'></div>
     </body>
   );
