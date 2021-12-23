@@ -1,3 +1,6 @@
+import NewCard from './components/NewCardForm';
+import CardList from './components/CardList';
+import Card from './components/Card';
 import React, { useState } from 'react';
 import './App.css';
 // import axios from 'axios';
@@ -31,13 +34,15 @@ function App() {
       </header>
       <NewBoardForm onBoardSubmit = {onBoardSubmit}/>
       <button className='Hide-board'> Hide Board</button>
-      <div className='Create-card'>
-
-      </div>
+      <div className='Create-card'>Create a New Card</div>
+      <button className="create-new-card">Create Card</button>
+      <NewCard />
       <div className='Display-board'>
         <BoardDisplay onBoardSelect={boardDisplay}/>
       </div>
       <div className='Card-display'></div>
+      <CardList />
+      <Card />
     </body>
   );
 }
