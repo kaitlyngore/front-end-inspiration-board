@@ -1,33 +1,73 @@
-import {React, useState} from 'react';
+// import {React, useState} from 'react';
+import React from 'react';
 // import PropTypes from 'prop-types';
 import './Card.css';
 // import CardList from './components/CardList';
 // import Card from './Card';
 
-const NewCard = (props) => {
-    const [cardMessage, setMessage] = useState('');
+class NewCard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
 
-    const updateMessage = (e) => {
-        setMessage(e.target.value)
-    };
+        this.updateMessage = this.handleChange.bind(this);
+        this.submitMessage = this.handleSubmit.bind(this);
+    }
 
-    const submitNewCard = (e) => {
-        e.preventDefault();
-        props.postNewCard(cardMessage);
-        setMessage('');
-    };
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
 
-    return (
-        <section className='newCardForm'>
-            <form className='updateCardForm' onSubmit={submitNewCard}>
-            <div className='updateCardMessage'>
-                <input placeholder="Update Card Message:" value={cardMessage} onChange={updateMessage} />
-                {/* <p>Update Card Message</p> */}
-                {/* <button onClick={updateMessage}>Update Card</button> */}
-            </div>
+    handleSubmit(event) {
+        alert('A card was submitted: ' + this.state.value);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    Card:
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                </label>
+                <input type="submit" value="Submit" />
             </form>
-        </section>
-    )
+        );
+    }
+}
+
+// const NewCard = (props) => {
+//     const [cardMessage, setMessage] = useState('');
+
+//     const updateMessage = (e) => {
+//         setMessage(e.target.value)
+//     };
+
+//     const submitNewCard = (e) => {
+//         e.preventDefault();
+//         props.postNewCard(cardMessage);
+//         setMessage('');
+//         console.log("Your card has been submitted!")
+//     };
+
+// //     Create
+// // Create a new card for the selected board, by filling out a form and filling out a "message."
+// // See an error message if I try to make the card's "message" more than 40 characters.
+// // All error messages can look like a new section on the screen, a red outline around the input field, and/or disabling the input, as long as it's visible
+// // See an error message if I try to make a new card with an empty/blank/invalid/missing "message."
+
+//     return (
+//         <section className='newCardForm'>
+//             <form className='updateCardForm' onSubmit={submitNewCard}>
+//             <div className='updateCardMessage'>
+//                 <input type="text" placeholder="Update Card Message:" value={cardMessage} />
+//                 {/* <input type="text" placeholder="Update Card Message:" value={cardMessage} onChange={updateMessage} /> */}
+//                 {/* <p>Update Card Message</p> */}
+//                 <button onClick={updateMessage}>Update Card</button>
+//             </div>
+//             </form>
+//         </section>
+//     )
 
     // return (
     //     [
@@ -70,7 +110,7 @@ const NewCard = (props) => {
     //       ))
     // )
 
-}
+
 
 
 // NewCard.PropTypes = {
