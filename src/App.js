@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-// import axios from 'axios';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
+// import CardList from './components/CardList';
 import NewCardForm from './components/NewCardForm';
-import CardList from './components/CardList';
-// import BoardDisplay from './components/BoardDisplay';
-// require('dotenv').config();
-let url = process.env.REACT_APP_BACKEND_BOARDS;
 const axios = require('axios');
 
 
 function App() {
-  const [board, setBoard] = useState({title: '', owner: '', board_id: null});
+  const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: null});
   const [boardList, setBoardList] = useState([]);
+  const [cardsDisplay, setCardsDisplay] = useState([]);
   const [boardDisplay, setBoardDisplay] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  let url = process.env.REACT_APP_BACKEND_BOARDS;
 // make new board
   const onNewBoard = (boardInfo) => {
     const newBoard = {
       title: boardInfo.title,
-      owner: boardInfo.owner
+      owner: boardInfo.owner,
+      board_id: null
     }
     axios.post(url, newBoard)
     .then(function(response) {
@@ -37,47 +36,60 @@ function App() {
   const hideBoard = () => {
     setBoardDisplay(!boardDisplay);
   }
-// get boards
-  // const getBoards = () => {
-  //   axios.get(url)
-  //   .then((response) => {
-  //     setBoardList(response.data);
-  //   })
-  //   .catch((error) => {
-  //     setErrorMessage(error.data)
-  //     console.log(errorMessage);
-  //   });
-  // }
-// get one board
-  const getOneBoard = (board) => {
-    axios.get(`${url}/${board.board_id}`)
+
+  const checkBoard = (board) => {
+    setBoard(board)
+    console.log(currentBoard);
+  }
+  const getCards = (id) => {
+    if (id === currentBoard.board_id) {
+    axios.get(`${url}/${currentBoard.board_id}/cards`)
     .then((response) => {
-      setBoard(response.data)
+    console.log(response.data);
+    setCardsDisplay(response.data)
     })
     .catch((error) => {
-      setErrorMessage(error.data)
-      console.log(errorMessage);
+    console.log(error.data)
     });
-  }
+}}
+
+  // useEffect(() => {
+    
+  //     axios.get(`${url}/${currentBoard.board_id}/cards`)
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       setCardsDisplay(response.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.data)
+  //     });
+    
+  // }, )
 // load board list
   useEffect(() => {
     axios.get(url)
     .then((response) => {
       setBoardList(response.data);
-    })
-    .catch((error) => {
-      setErrorMessage(error.data)
-      console.log(errorMessage);
     });
-  }, [boardList])
+  }, )
 
 // going through the boards to add them to the list
-  const addBoardList = boardList.map((oneBoard) => {
-      return (<Board key={oneBoard.board_id} board={oneBoard} setBoard={getOneBoard}></Board>)
+  const addBoardList = boardList.map((oneBoard, index) => {
+      return (<li> 
+        <Board key={index+1} id={index+1} board ={oneBoard} current={checkBoard}/>
+      </li>)
     })
   
-    // const [cards, setCards] = useState([{id: 3, board_id: 1, message: 'hello'}]);
-    // const dummyCards = [{}]
+    // const cardDisplay = (card) => {
+    //   if (currentBoard.board_id === card.board_id) {
+    //     return (
+    //       <li>
+    //         <CardList/>
+    //       </li>
+    //     )
+    //   }
+    // }
+  
 
   return (
     // <body className='App-body'>
@@ -85,13 +97,23 @@ function App() {
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
-      <NewBoardForm onBoardSubmit = {onNewBoard}/>
+      {boardDisplay? <NewBoardForm onBoardSubmit = {onNewBoard}/>: ""}
       <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
-      <div className='Display-board'>
-        {addBoardList}
+      <div className='Create-card'>Create a New Card</div>
+      <button className="create-new-card">Create Card</button>
+      <NewCard />
+      <div className='Display-board-list' onClick={getCards}>
+        <ol>{addBoardList}</ol>
       </div>
-    {/* add onClick to display cards when board is selected */}
-    </div>
+      <div className="board"> 
+        
+      </div>
+      <div className='Card-display'>
+        <ol>
+        {cardsDisplay}
+        </ol>
+      </div>
+    </body>
   );
 }
 

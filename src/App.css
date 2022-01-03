@@ -1,6 +1,7 @@
 .Board {
   padding: 5px 20px;
-  width: 150px;
+  /* width: 150px; */
+  align-self: flex-start;
 }
 
 .Board fieldset {
@@ -9,6 +10,7 @@
 
 .Site-name {
   text-align: center;
+<<<<<<< HEAD
 }
 
 .card {
@@ -25,4 +27,25 @@
 /* Add some padding inside the card container */
 .container {
   padding: 2px 16px;
+=======
+  justify-self: center;
+}
+
+.Display-board-list {
+  padding: 5px 20px;
+  /* width: 150px; */
+  border-style: dotted;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* flex-flow: column; */
+}
+
+.Card-display {
+  padding: 5px 20px;
+  /* width: 150px; */
+  border-style: dotted;
+>>>>>>> 1eb3292ab87588765e78c47af0d5b1281f92b6e4
 }
