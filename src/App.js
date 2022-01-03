@@ -1,4 +1,6 @@
 import NewCard from './components/NewCardForm';
+import Card from './components/Card';
+import CardList from './components/CardList';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from './components/Board';
@@ -8,7 +10,8 @@ const axios = require('axios');
 function App() {
   const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: null});
   const [boardList, setBoardList] = useState([]);
-  const [cardsDisplay, setCardsDisplay] = useState([]);
+  // const [cardsDisplay, setCardsDisplay] = useState([]);
+  const [cards, setCards] = useState({message: '', card_likes: null})
   const [boardDisplay, setBoardDisplay] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   let url = process.env.REACT_APP_BACKEND_BOARDS;
@@ -37,18 +40,32 @@ function App() {
     setBoard(board)
     console.log(currentBoard);
   }
-  const getCards = (id) => {
-    if (id === currentBoard.board_id) {
-    axios.get(`${url}/${currentBoard.board_id}/cards`)
-    .then((response) => {
-    console.log(response.data);
-    setCardsDisplay(response.data)
-    })
-    .catch((error) => {
-    console.log(error.data)
-    });
-}}
 
+  const checkCards = (card) => {
+    setCards(card)
+    console.log(cards);
+  }
+
+//   const getCards = (id) => {
+//     if (id === currentBoard.board_id) {
+//     axios.get(`${url}/${currentBoard.board_id}/cards`)
+//     .then((response) => {
+//     console.log(response.data);
+//     setCardsDisplay(response.data)
+//     })
+//     .catch((error) => {
+//     console.log(error.data)
+//     });
+// }}
+  // const getBoards = (id) => {
+  //   if (id === currentBoard.board_id) {
+  //     axios.get(`${url}/${currentBoard.board_id}`)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setBoard(response.data)
+  //     });
+  //   }
+  // }
   // useEffect(() => {
     
   //     axios.get(`${url}/${currentBoard.board_id}/cards`)
@@ -75,17 +92,6 @@ function App() {
         <Board key={index+1} id={index+1} board ={oneBoard} current={checkBoard}/>
       </li>)
     })
-  
-    // const cardDisplay = (card) => {
-    //   if (currentBoard.board_id === card.board_id) {
-    //     return (
-    //       <li>
-    //         <CardList/>
-    //       </li>
-    //     )
-    //   }
-    // }
-  
 
   return (
     <body className='App-body'>
@@ -97,17 +103,15 @@ function App() {
       <div className='Create-card'>Create a New Card</div>
       <button className="create-new-card">Create Card</button>
       <NewCard />
-      <div className='Display-board-list' onClick={getCards}>
+      <div className='Display-board-list' >
         <ol>{addBoardList}</ol>
       </div>
       <div className="board"> 
-        
+      {currentBoard.board_id? currentBoard.title: ""}
       </div>
-      <div className='Card-display'>
-        <ol>
-        {cardsDisplay}
-        </ol>
-      </div>
+      <section className='Card-display'>
+        {currentBoard.board_id? <CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/>: ""}
+      </section>
     </body>
   );
 }
