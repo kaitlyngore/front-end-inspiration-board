@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 // import PropTypes from 'prop-types';
 import './Form.css';
 
-
 const NewBoardForm = (props) => {
   const baseData = {title: '', owner: ''};
   const [formData, setFormData] = useState(baseData);
@@ -42,6 +41,5 @@ const NewBoardForm = (props) => {
           </div>
     );
   }
-
 
 export default NewBoardForm;

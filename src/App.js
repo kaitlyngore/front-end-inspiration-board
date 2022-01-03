@@ -1,6 +1,4 @@
 import NewCard from './components/NewCardForm';
-import CardList from './components/CardList';
-import Card from './components/Card';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from './components/Board';
