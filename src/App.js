@@ -6,7 +6,6 @@ import NewBoardForm from './components/NewBoardForm';
 import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
 
-
 function App() {
   const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: null});
   const [boardList, setBoardList] = useState([]);
@@ -101,7 +100,7 @@ function App() {
       <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
       <div className='Create-card'>Create a New Card</div>
       <button className="create-new-card">Create Card</button>
-      <NewCard />
+      <NewCardForm />
       <div className='Display-board-list' onClick={getCards}>
         <ol>{addBoardList}</ol>
       </div>
@@ -113,7 +112,7 @@ function App() {
         {cardsDisplay}
         </ol>
       </div>
-    </body>
+    </div>
   );
 }
 
