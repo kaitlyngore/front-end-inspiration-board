@@ -1,13 +1,15 @@
-import NewCard from './components/NewCardForm';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 // import axios from 'axios';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
-import BoardDisplay from './components/BoardDisplay';
+import NewCardForm from './components/NewCardForm';
+import CardList from './components/CardList';
+// import BoardDisplay from './components/BoardDisplay';
 // require('dotenv').config();
 let url = process.env.REACT_APP_BACKEND_BOARDS;
 const axios = require('axios');
+
 
 function App() {
   const [board, setBoard] = useState({title: '', owner: '', board_id: null});
@@ -29,6 +31,8 @@ function App() {
       console.log(setErrorMessage(error.data));
     });
   }
+
+
 // hide board
   const hideBoard = () => {
     setBoardDisplay(!boardDisplay);
@@ -72,23 +76,22 @@ function App() {
       return (<Board key={oneBoard.board_id} board={oneBoard} setBoard={getOneBoard}></Board>)
     })
   
- 
+    // const [cards, setCards] = useState([{id: 3, board_id: 1, message: 'hello'}]);
+    // const dummyCards = [{}]
 
   return (
-    <body className='App-body'>
+    // <body className='App-body'>
+    <div className='App-body'>
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
       <NewBoardForm onBoardSubmit = {onNewBoard}/>
       <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
-      <div className='Create-card'>Create a New Card</div>
-      <button className="create-new-card">Create Card</button>
-      <NewCard />
       <div className='Display-board'>
         {addBoardList}
       </div>
-      <div className='Card-display'></div>
-    </body>
+    {/* add onClick to display cards when board is selected */}
+    </div>
   );
 }
 
