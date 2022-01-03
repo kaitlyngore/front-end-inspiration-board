@@ -24,3 +24,9 @@ body {
   flex-direction: column;
   /* flex-flow: column; */
 }
+
+.Card-display {
+  padding: 5px 20px;
+  /* width: 150px; */
+  border-style: dotted;
+}
