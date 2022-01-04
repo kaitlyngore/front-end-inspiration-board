@@ -1,126 +1,44 @@
-// import {React, useState} from 'react';
-import React from 'react';
-// import PropTypes from 'prop-types';
+import {React, useState} from 'react';
 import './Card.css';
-import './Form.css';
-// import CardList from './components/CardList';
-// import Card from './Card';
+import axios from 'axios';
 
-class NewCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: ''};
+const NewCardForm = (props) => {
+    
+    const [newCard, setNewCard] = useState("");
+    const [createCardData, setCardData] = useState([]);
 
-        this.updateMessage = this.handleChange.bind(this);
-        this.submitMessage = this.handleSubmit.bind(this);
-    }
+    const updateCard = (event) => {
+        setNewCard(event.target.value);
+    };
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-
-    handleSubmit(event) {
-        alert('A card was submitted: ' + this.state.value);
+    const submitCard = (event) => {
         event.preventDefault();
-    }
+        props.createNewCard(event.target.value);
+        setNewCard("");
 
-    render() {
-        return (
-            <div>
-            <h3>Create Card</h3>
-            <form onSubmit={this.handleSubmit}>
-                <fieldset>
-                <label>
-                    <p> Message:</p>
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                </fieldset>
-                <input type="submit" value="Submit" />
-            </form>
-            </div>
-        );
-    }
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/board/${props.board.board_id}}`)
+        .then((response) => {
+            const createNewCard = [...createCardData.cards]
+            createNewCard.push(props.data.card)
+            setCardData(createNewCard)
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log(error.response);
+        })
+    };
+
+    return (
+        <div id='card-form'>
+        <form onSubmit={submitCard}>
+            <label>Card Message:</label>
+                {/* <input type="text" value={this.state.value} onChange={this.handleChange} className={(setNewCard.length === 0) || (setNewCard.length > 40)? 'invalid-input' : ''}/>
+            <input type="submit" value="Submit" disabled={((this.state.value.length === 0) || (this.state.value.length > 40))}/> */}
+                <input type="text" value={newCard} onChange={updateCard} minLength={1} maxLength={40}/>
+            <input type="submit" value="Submit" />
+        </form>
+        </div>
+    )
 }
 
-// const NewCard = (props) => {
-//     const [cardMessage, setMessage] = useState('');
-
-//     const updateMessage = (e) => {
-//         setMessage(e.target.value)
-//     };
-
-//     const submitNewCard = (e) => {
-//         e.preventDefault();
-//         props.postNewCard(cardMessage);
-//         setMessage('');
-//         console.log("Your card has been submitted!")
-//     };
-
-// //     Create
-// // Create a new card for the selected board, by filling out a form and filling out a "message."
-// // See an error message if I try to make the card's "message" more than 40 characters.
-// // All error messages can look like a new section on the screen, a red outline around the input field, and/or disabling the input, as long as it's visible
-// // See an error message if I try to make a new card with an empty/blank/invalid/missing "message."
-
-//     return (
-//         <section className='newCardForm'>
-//             <form className='updateCardForm' onSubmit={submitNewCard}>
-//             <div className='updateCardMessage'>
-//                 <input type="text" placeholder="Update Card Message:" value={cardMessage} />
-//                 {/* <input type="text" placeholder="Update Card Message:" value={cardMessage} onChange={updateMessage} /> */}
-//                 {/* <p>Update Card Message</p> */}
-//                 <button onClick={updateMessage}>Update Card</button>
-//             </div>
-//             </form>
-//         </section>
-//     )
-
-    // return (
-    //     [
-    //         'Primary',
-    //         'Secondary',
-    //         'Success',
-    //         'Danger',
-    //         'Warning',
-    //         'Info',
-    //         'Light',
-    //         'Dark',
-    //       ].map((variant, idx) => (
-    //         <Card
-    //           bg={variant.toLowerCase()}
-    //           key={idx}
-    //           text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
-    //           style={{ width: '18rem' }}
-    //           className="mb-2"
-    //         >
-    //           <Card.Header>Header</Card.Header>
-    //           <Card.Body>
-    //             <Card.Title>{variant} Card Title </Card.Title>
-    //             <Card.Text>
-    //               Some quick example text to build on the card title and make up the bulk
-    //               of the card's content.
-    //             </Card.Text>
-    //             {/* <Button variant="primary">Go somewhere</Button> */}
-    //           </Card.Body>
-    //           <section className='newCardForm'>
-    //         <div className='updateCardMessage'>
-    //             <p>Update Card Message</p>
-    //             <button onClick={updateMessage}>Update Card</button>
-    //         </div>
-    //         <div className='submitNewCard'>
-    //             <p>New Card</p>
-    //             <button onClick={submitNewCard}>Submit New Card</button>
-    //         </div>
-    //     </section>
-    //         </Card>
-    //       ))
-    // )
-
-
-
-
-// NewCard.PropTypes = {
-
-// }
-
-export default NewCard;
+export default NewCardForm;

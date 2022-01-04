@@ -1,9 +1,9 @@
-import NewCard from './components/NewCardForm';
-import CardList from './components/CardList';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
+import CardList from './components/CardList';
+import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
 
 function App() {
@@ -30,6 +30,8 @@ function App() {
       console.log(setErrorMessage(error.data));
     });
   }
+
+
 // hide board
   const hideBoard = () => {
     setBoardDisplay(!boardDisplay);
@@ -64,21 +66,19 @@ function App() {
     })
 
   return (
-    <body className='App-body'>
+    // <body className='App-body'>
+    <div className='App-body'>
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
       <div className="Board">
       {boardDisplay? <NewBoardForm onBoardSubmit = {onNewBoard}/>: ""}
       <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
-      </div>
-      <div className='Create-card'>
-      <NewCard />
+      <div className='Create-card'>Create a New Card</div>
       <button className="create-new-card">Create Card</button>
-      </div>
-      <div className='Display-board-list' > 
-      <fieldset>
-        <h3>My Boards</h3>
+      <NewCardForm />
+      <div className='Display-board-list' >
+        <fieldset>
         <ol>{addBoardList}</ol>
       </fieldset>
       </div>
@@ -88,7 +88,8 @@ function App() {
       <div className='Card-display'>
         {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
       </div>
-    </body>
+    </div>
+    </div>
   );
 }
 
