@@ -23,7 +23,7 @@ const NewBoardForm = (props) => {
   }
 
     return (
-      <div className="Board">
+      <div >
         <h3>Create Board</h3>
         <form onSubmit={handleSubmit}>
           <fieldset>

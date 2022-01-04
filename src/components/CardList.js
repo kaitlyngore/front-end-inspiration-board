@@ -9,21 +9,22 @@ import Card from './Card';
 function CardList(props) {
     const [cardsDisplay, setCardsDisplay] = useState([]);
     useEffect(() => {
-        axios.get(`${props.url}/${props.currentBoard.board_id}/cards`)
+        axios.get(`${props.url}/${props.currentBoard}/cards`)
         .then((response) => {
             setCardsDisplay(response.data)
         });
-    }, )
-    const allCards = cardsDisplay.map((card) => {
+    }, );
+    const allCards = cardsDisplay.map((card, index) => {
         if (card.board_id === props.currentBoard) {
-        return (<p>
-            <Card card ={card} checkCard={props.cards} currentBoard={props.currentBoard}>
+        return (<div>
+            <Card key={card.id.toString()} card ={card} checkCard={props.cards} currentBoard={props.currentBoard}/>
                 {/* cardId={card.id} */}
                 {/* cardMessage={card.message}
                 cardLikes={card.likes_count} */}
-            </Card></p>
+                {/* {console.log(card.key)} */}
+            </div>
         )}
-        else return "";
+        else return null
     })
     // console.log(cardsDisplay)
     // const cards = props.cards;
@@ -31,9 +32,9 @@ function CardList(props) {
     // <p>{card}</p>
     // );
     return (
-        <div className='all-cards'>
-            All Cards: {allCards}
-        </div>
+        <ol className='all-cards'>
+            {allCards}
+        </ol>
     )
 }
 

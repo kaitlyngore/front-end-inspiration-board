@@ -13,7 +13,7 @@ const Board = (props) => {
     } 
     // console.log(getBoard)
     return (
-        <div className="Board-item" onClick={selectBoard}> {props.board.title} </div>
+        <li className="Board-item" onClick={selectBoard}> {props.board.title} </li>
     )
 
 }

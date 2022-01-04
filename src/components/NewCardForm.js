@@ -2,6 +2,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import './Card.css';
+import './Form.css';
 // import CardList from './components/CardList';
 // import Card from './Card';
 
@@ -25,13 +26,18 @@ class NewCard extends React.Component {
 
     render() {
         return (
+            <div>
+            <h3>Create Card</h3>
             <form onSubmit={this.handleSubmit}>
+                <fieldset>
                 <label>
-                    Card:
+                    <p> Message:</p>
                     <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
+                </fieldset>
                 <input type="submit" value="Submit" />
             </form>
+            </div>
         );
     }
 }

@@ -1,5 +1,4 @@
 import NewCard from './components/NewCardForm';
-import Card from './components/Card';
 import CardList from './components/CardList';
 import React, { useState, useEffect } from 'react';
 import './App.css';
@@ -8,19 +7,19 @@ import NewBoardForm from './components/NewBoardForm';
 const axios = require('axios');
 
 function App() {
-  const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: null});
+  const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: 0});
   const [boardList, setBoardList] = useState([]);
-  // const [cardsDisplay, setCardsDisplay] = useState([]);
   const [cards, setCards] = useState({message: '', card_likes: null})
   const [boardDisplay, setBoardDisplay] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   let url = process.env.REACT_APP_BACKEND_BOARDS;
+
 // make new board
   const onNewBoard = (boardInfo) => {
     const newBoard = {
       title: boardInfo.title,
       owner: boardInfo.owner,
-      board_id: null
+      board_id: boardInfo.board_id +1
     }
     axios.post(url, newBoard)
     .then(function(response) {
@@ -46,51 +45,22 @@ function App() {
     console.log(cards);
   }
 
-//   const getCards = (id) => {
-//     if (id === currentBoard.board_id) {
-//     axios.get(`${url}/${currentBoard.board_id}/cards`)
-//     .then((response) => {
-//     console.log(response.data);
-//     setCardsDisplay(response.data)
-//     })
-//     .catch((error) => {
-//     console.log(error.data)
-//     });
-// }}
-  // const getBoards = (id) => {
-  //   if (id === currentBoard.board_id) {
-  //     axios.get(`${url}/${currentBoard.board_id}`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setBoard(response.data)
-  //     });
-  //   }
-  // }
-  // useEffect(() => {
-    
-  //     axios.get(`${url}/${currentBoard.board_id}/cards`)
-  //     .then((response) => {
-  //       console.log(response.data)
-  //       setCardsDisplay(response.data)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.data)
-  //     });
-    
-  // }, )
 // load board list
   useEffect(() => {
     axios.get(url)
     .then((response) => {
       setBoardList(response.data);
+    })
+    .catch((error) => {
+      console.log(error.data)
     });
-  }, )
+  }, );
 
 // going through the boards to add them to the list
   const addBoardList = boardList.map((oneBoard, index) => {
-      return (<li> 
+      return (<p> 
         <Board key={index+1} id={index+1} board ={oneBoard} current={checkBoard}/>
-      </li>)
+      </p>)
     })
 
   return (
@@ -98,20 +68,26 @@ function App() {
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
+      <div className="Board">
       {boardDisplay? <NewBoardForm onBoardSubmit = {onNewBoard}/>: ""}
       <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
-      <div className='Create-card'>Create a New Card</div>
-      <button className="create-new-card">Create Card</button>
+      </div>
+      <div className='Create-card'>
       <NewCard />
-      <div className='Display-board-list' >
+      <button className="create-new-card">Create Card</button>
+      </div>
+      <div className='Display-board-list' > 
+      <fieldset>
+        <h3>My Boards</h3>
         <ol>{addBoardList}</ol>
+      </fieldset>
       </div>
       <div className="board"> 
-      {currentBoard.board_id? currentBoard.title: ""}
+      {currentBoard.board_id? currentBoard.title: errorMessage}
       </div>
-      <section className='Card-display'>
-        {currentBoard.board_id? <CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/>: ""}
-      </section>
+      <div className='Card-display'>
+        {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
+      </div>
     </body>
   );
 }
