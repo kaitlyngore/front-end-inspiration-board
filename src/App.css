@@ -1,6 +1,10 @@
 .Board-board {
   grid-column-start: 1;
   grid-row-start: 2;
+  background-image: url('/src/assets/Paper_pushpin.jpg');
+  background-size:cover;
+  border-style:groove;
+  border-color: gold;
   /* padding: 5px 20px; */
   /* width: 150px; */
   /* align-self: flex-start; */
@@ -9,6 +13,10 @@
 .Card-board {
   grid-column-start: 1;
   grid-row-start: 3;
+  background-image: url('/src/assets/Wide_paper.jpg');
+  background-size:cover;
+  border-style: groove;
+  border-color: gold;
 }
 
 .Board fieldset {
@@ -26,11 +34,18 @@ header {
   grid-row-end: 1;
   text-align: center;
   justify-self: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  color:rgb(107, 18, 134);
 }
 
 .Display-board-list {
   grid-column-start: 2;
   grid-row-start: 2;
+  background-image: url('/src/assets/Paper.jpg');
+  background-size:contain;
+  border-style: groove;
+  border-color: gold;
   align-content: center;
   padding: 5px 20px;
   margin:auto;
@@ -39,6 +54,8 @@ header {
 .board {
   grid-column-start: 2;
   grid-row-start: 3;
+  border-style:groove;
+  border-color: gold;
   align-content: center;
   padding:5px 20px;
 }
@@ -58,6 +75,16 @@ body {
 .Card-display {
   grid-column-start: 3;
   /* width: 150px; */
-  border-style: dotted;
+  border-style: groove;
+  border-color: gold;
 } 
 
+body {
+  background-image: radial-gradient(rgba(0,0,255,0.05), rgba(0,0,0,0.025) 25px, rgba(0, 0, 0, 0.2) 26px, transparent 26px),
+  radial-gradient(transparent 25px, rgba(226, 136, 222, 0.4) 25px, rgba(227, 169, 250, 0.4) 26px, transparent 26px),
+  radial-gradient(transparent 50px, rgba(238, 240, 150, 0.25) 50px, rgba(91, 117, 202, 0.25) 51px, transparent 51px),
+  radial-gradient(rgba(176,196,222,0.5), rgba(176,196,222,0) 50px),
+  radial-gradient(transparent 25px, rgba(135,206,250,0.35) 25px, rgba(135,206,250,0.35) 26px, transparent 26px);
+  background-size: 200px 200px;
+  background-position:  -45px, 0, 20px 50px, 25px 55px, 50px 125px;
+}

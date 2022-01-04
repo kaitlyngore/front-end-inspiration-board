@@ -86,10 +86,8 @@ function App() {
       </fieldset>
       </div>
       <div className="board"> 
-      <h3>Let's Take A Look Inside...</h3>
-      <fieldset>
+      <h4>Let's Take A Look Inside...</h4>
       {currentBoard.board_id? currentBoard.title: errorMessage}
-      </fieldset>
       </div>
       <div className='Card-display'>
         <h3>Cards, Cards, Cards!</h3>

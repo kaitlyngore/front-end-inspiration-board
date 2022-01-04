@@ -26,7 +26,7 @@ const NewBoardForm = (props) => {
       <div >
         <h3>Create Board</h3>
         <form onSubmit={handleSubmit}>
-          <fieldset>
+          {/* <fieldset> */}
             <label>
             <p>Title: </p>
             <input type="text" name="title" value={formData.title} onChange={titleChange}/>
@@ -35,7 +35,7 @@ const NewBoardForm = (props) => {
             <p> Owner: </p>
             <input type="text" name="owner" value = {formData.owner} onChange={ownerChange}/>
           </label>
-        </fieldset>
+        {/* </fieldset> */}
         <button type="submit">Submit</button>
         </form>
           </div>
