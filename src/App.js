@@ -66,30 +66,37 @@ function App() {
     })
 
   return (
-    // <body className='App-body'>
-    <div className='App-body'>
+    <body className='App-body'>
+    {/* <div className='App-body'> */}
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
-      <div className="Board">
-      {boardDisplay? <NewBoardForm onBoardSubmit = {onNewBoard}/>: ""}
-      <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
-      <div className='Create-card'>Create a New Card</div>
-      <button className="create-new-card">Create Card</button>
+      <div className="Board-board">
+        {boardDisplay? <NewBoardForm onBoardSubmit = {onNewBoard}/>: ""}
+        <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
+      </div>
+      <div className='Card-board'>
       <NewCardForm />
-      <div className='Display-board-list' >
+      <button className="create-new-card">Create Card</button>
+      </div>
+      <div className='Display-board-list'> 
+      <h3>My Boards</h3>
         <fieldset>
         <ol>{addBoardList}</ol>
       </fieldset>
       </div>
       <div className="board"> 
+      <h3>Let's Take A Look Inside...</h3>
+      <fieldset>
       {currentBoard.board_id? currentBoard.title: errorMessage}
+      </fieldset>
       </div>
       <div className='Card-display'>
+        <h3>Cards, Cards, Cards!</h3>
         {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
       </div>
-    </div>
-    </div>
+    {/* </div> */}
+    </body>
   );
 }
 
