@@ -62,8 +62,8 @@ const Card = (props) => {
         <section id='info'>
             <div className='row'>
                 <div className='card'>
-                    <p className='card-message'>Message: {props.cardMessage}</p>
-                    <p className='card-likes'>Likes: {props.cardLikes}</p>
+                    <p className='card-message'>Message: {props.card.message}</p>
+                    <p className='card-likes'>Likes: {props.card.likes_count}</p>
                     <button onClick={likeCardButton}>Like</button>
                 </div>
             </div>
