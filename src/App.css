@@ -23,7 +23,7 @@
   margin: 20px 0;
 }
 
-body h3 {
+div h3 {
   text-align: center;
 }
 
@@ -60,13 +60,21 @@ header {
   padding:5px 20px;
 }
 
-body {
+.App-body {
   display: grid;
   grid-template-columns: auto ;
   grid-template-rows: auto;
   gap:50px;
   background-color: rgb(206, 238, 220);
+  background-image: radial-gradient(rgba(0,0,255,0.05), rgba(0,0,0,0.025) 25px, rgba(0, 0, 0, 0.2) 26px, transparent 26px),
+  radial-gradient(transparent 25px, rgba(226, 136, 222, 0.4) 25px, rgba(227, 169, 250, 0.4) 26px, transparent 26px),
+  radial-gradient(transparent 50px, rgba(238, 240, 150, 0.25) 50px, rgba(91, 117, 202, 0.25) 51px, transparent 51px),
+  radial-gradient(rgba(176,196,222,0.5), rgba(176,196,222,0) 50px),
+  radial-gradient(transparent 25px, rgba(135,206,250,0.35) 25px, rgba(135,206,250,0.35) 26px, transparent 26px);
+  background-size: 200px 200px;
+  background-position:  -45px, 0, 20px 50px, 25px 55px, 50px 125px;
 }
+
 .Create-card {
   grid-row-start: 3;
   padding: 5px 20px;
@@ -77,14 +85,4 @@ body {
   /* width: 150px; */
   border-style: groove;
   border-color: gold;
-} 
-
-body {
-  background-image: radial-gradient(rgba(0,0,255,0.05), rgba(0,0,0,0.025) 25px, rgba(0, 0, 0, 0.2) 26px, transparent 26px),
-  radial-gradient(transparent 25px, rgba(226, 136, 222, 0.4) 25px, rgba(227, 169, 250, 0.4) 26px, transparent 26px),
-  radial-gradient(transparent 50px, rgba(238, 240, 150, 0.25) 50px, rgba(91, 117, 202, 0.25) 51px, transparent 51px),
-  radial-gradient(rgba(176,196,222,0.5), rgba(176,196,222,0) 50px),
-  radial-gradient(transparent 25px, rgba(135,206,250,0.35) 25px, rgba(135,206,250,0.35) 26px, transparent 26px);
-  background-size: 200px 200px;
-  background-position:  -45px, 0, 20px 50px, 25px 55px, 50px 125px;
 }

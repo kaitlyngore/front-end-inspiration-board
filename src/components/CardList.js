@@ -6,16 +6,25 @@ function CardList(props) {
     const [cardsDisplay, setCardsDisplay] = useState([]);
     
     useEffect(() => {
+        getCardList();
+    }, []);
+
+    const getCardList = () => {
         axios.get(`${props.url}/${props.currentBoard}/cards`)
         .then((response) => {
             setCardsDisplay(response.data)
         });
-    }, [cardsDisplay]);
+    }
 
     const allCards = cardsDisplay.map((card, index) => {
         if (card.board_id === props.currentBoard) {
         return (<div>
-            <Card key={card.id.toString()} card={card} checkCard={props.cards} currentBoard={props.currentBoard}/>
+            <Card 
+            key={card.id.toString()} 
+            card={card} 
+            checkCard={props.cards} 
+            currentBoard={props.currentBoard}
+            getCardList={getCardList}/>
             </div>
         )}
         else return null;

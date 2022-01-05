@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
+import Card from './components/Card';
 import CardList from './components/CardList';
 import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
@@ -47,22 +48,6 @@ function App() {
     });
   }
 
-  const addCard = (card) => {
-    console.log(card, card.id)
-    console.log("board id", currentBoard.board_id)
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.board_id}/cards`, card)
-    .then((response) => {
-        // const createNewCard = [...createCardData]
-        // createNewCard.push(response.data.card)
-        // setCardData(createNewCard);
-        console.log(response)
-    })
-    .catch((error) => {
-        console.log(error);
-        console.log(error.response);
-    })
-  }
-
 // hide board
   const hideBoard = () => {
     setBoardDisplay(!boardDisplay);
@@ -85,8 +70,20 @@ function App() {
       </p>)
     })
 
+
+  const addCard = (card) => {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.board_id}/cards`, card)
+    .then((response) => {
+        console.log(response)
+    })
+    .catch((error) => {
+        console.log(error);
+        console.log(error.response);
+    })
+  }
+
   return (
-    <body className='App-body'>
+    <div className='App-body'>
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
@@ -111,7 +108,7 @@ function App() {
         <h3>Cards, Cards, Cards!</h3>
         {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
       </div>
-    </body>
+    </div>
   );
 }
 

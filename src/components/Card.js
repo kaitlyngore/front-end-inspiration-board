@@ -5,12 +5,10 @@ const Card = (props) => {
     const [cardLikes, setLikes] = useState();
 
     const likeCardButton = () => {
-        // setLikes(cardLikes + 1)
-        // console.log(cardLikes)
-
         axios.patch(`${process.env.REACT_APP_BACKEND_URL}/cards/${props.card.id}/like`, cardLikes)
         .then((response) => {
             console.log("Liked!");
+            props.getCardList();
         })
         .catch((error) => {
             console.log(error);
@@ -19,7 +17,6 @@ const Card = (props) => {
     };
     
     const deleteCardButton = () => {
-
         axios.delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${props.card.id}`)
         .then((response) => {
             console.log("Card successfully deleted");
