@@ -8,7 +8,7 @@ import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
 
 function App() {
-  const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: 0});
+  const [currentBoard, setBoard] = useState({title: '', owner: '', id: 0});
   const [boardList, setBoardList] = useState([]);
   const [cards, setCards] = useState({message: '', card_likes: null})
   const [boardDisplay, setBoardDisplay] = useState(true);
@@ -32,10 +32,13 @@ function App() {
 
 // make new board
   const onNewBoard = (boardInfo) => {
+    if (!boardInfo.title || !boardInfo.owner) {
+      alert('Missing Information!')
+    }else {
     const newBoard = {
       title: boardInfo.title,
       owner: boardInfo.owner,
-      board_id: boardInfo.board_id +1
+      id: boardInfo.id +1
     }
     axios.post(url, newBoard)
     .then(function(response) {
@@ -46,7 +49,7 @@ function App() {
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
     });
-  }
+  }}
 
 // hide board
   const hideBoard = () => {
@@ -102,11 +105,11 @@ function App() {
       </div>
       <div className="board"> 
       <h4>Let's Take A Look Inside...</h4>
-      {currentBoard.board_id? currentBoard.title: errorMessage}
+      {currentBoard.id? currentBoard.title: errorMessage}
       </div>
       <div className='Card-display'>
         <h3>Cards, Cards, Cards!</h3>
-        {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
+        {currentBoard.id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
       </div>
     </div>
   );

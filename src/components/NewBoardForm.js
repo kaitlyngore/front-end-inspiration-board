@@ -8,7 +8,6 @@ const NewBoardForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert('Board Created')
 
     props.onBoardSubmit({title: formData.title, owner: formData.owner});
     setFormData(baseData);
