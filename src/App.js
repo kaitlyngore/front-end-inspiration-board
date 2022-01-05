@@ -17,7 +17,7 @@ function App() {
     // load board list
     useEffect(() => {
       getBoardListTest();
-    }, [] );
+    }, []);
   
     const getBoardListTest = () => {
       axios.get(url)
@@ -40,15 +40,15 @@ function App() {
     .then(function(response) {
       setBoard(response.data)
       console.log(response);
+      getBoardListTest();
     })
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
     });
-    getBoardListTest();
   }
 
   const addCard = (card) => {
-    console.log(card)
+    console.log(card, card.id)
     console.log("board id", currentBoard.board_id)
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.board_id}/cards`, card)
     .then((response) => {
@@ -87,7 +87,6 @@ function App() {
 
   return (
     <body className='App-body'>
-    {/* <div className='App-body'> */}
       <header>
       <h1 className='Site-name'>Let's Git It Done</h1>
       </header>
@@ -97,7 +96,6 @@ function App() {
       </div>
       <div className='Card-board'>
       <NewCardForm createNewCard={addCard}/>
-      <button className="create-new-card">Create Card</button>
       </div>
       <div className='Display-board-list'> 
       <h3>My Boards</h3>
@@ -113,7 +111,6 @@ function App() {
         <h3>Cards, Cards, Cards!</h3>
         {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
       </div>
-    {/* </div> */}
     </body>
   );
 }

@@ -5,19 +5,11 @@ import axios from 'axios';
 const Card = (props) => {
     const [cardLikes, setLikes] = useState();
 
-    // const likeCardButton = () => {
-    //     // props.likeCard(props.id)
-    //     // increaseCardLikes(cardLikes + 1)
-    //     setLikes(props.card.likes_count + 1)
-    // }
-
-    // const [cardLikes, setLikes] = useState(props.numberOfLikes);
-
     const likeCardButton = () => {
-        setLikes(cardLikes + 1)
-        console.log(cardLikes)
+        // setLikes(cardLikes + 1)
+        // console.log(cardLikes)
 
-        axios.put(`${process.env.REACT_APP_BACKEND_URL}/board/${props.id}}`, cardLikes)
+        axios.patch(`${process.env.REACT_APP_BACKEND_URL}/cards/${props.card.id}/like`, cardLikes)
         .then((response) => {
             console.log("Liked!");
         })
@@ -25,14 +17,11 @@ const Card = (props) => {
             console.log(error);
             console.log(error.response);
         })
-    }
+    };
     
     const deleteCardButton = () => {
-        // props.deleteCard(props.card.id)
-    
-        props.deleteCard(props.id)
-        
-        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/board/${props.id}`)
+
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${props.card.id}`)
         .then((response) => {
             console.log("Card successfully deleted");
         })
@@ -41,24 +30,8 @@ const Card = (props) => {
             console.log(error.response);
         })
     };
-
-    // possible test code
     
-        const selectedCard = {
-            board_id: props.currentBoard,
-            message: props.card.message,
-            likes_count: props.card.likes_count
-        }
-        // props.checkCard(selectedCard);
-    
-
     return (
-        // <section>
-        //     <div className='card' > 
-        //         <p className='card-message'>Message: {props.card.message}</p>
-        //         <p className='card-likes'>Likes: {props.card.likes_count}</p>
-        //         <button onClick={likeCardButton}>Like</button>
-        //         </div>
         <section id='info'>
             <div className='row'>
                 <div className='card'>
@@ -71,7 +44,6 @@ const Card = (props) => {
                 <button onClick={deleteCardButton}>Delete</button>
             </div>
         </section>
-        // </section>
     )
 }
 
