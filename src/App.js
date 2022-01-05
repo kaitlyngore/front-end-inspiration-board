@@ -14,6 +14,21 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   let url = process.env.REACT_APP_BACKEND_BOARDS;
 
+    // load board list
+    useEffect(() => {
+      getBoardListTest();
+    }, [] );
+  
+    const getBoardListTest = () => {
+      axios.get(url)
+      .then((response) => {
+        setBoardList(response.data);
+      })
+      .catch((error) => {
+        console.log(error.data)
+      });
+    }
+
 // make new board
   const onNewBoard = (boardInfo) => {
     const newBoard = {
@@ -29,8 +44,24 @@ function App() {
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
     });
+    getBoardListTest();
   }
 
+  const addCard = (card) => {
+    console.log(card)
+    console.log("board id", currentBoard.board_id)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.board_id}/cards`, card)
+    .then((response) => {
+        // const createNewCard = [...createCardData]
+        // createNewCard.push(response.data.card)
+        // setCardData(createNewCard);
+        console.log(response)
+    })
+    .catch((error) => {
+        console.log(error);
+        console.log(error.response);
+    })
+  }
 
 // hide board
   const hideBoard = () => {
@@ -39,29 +70,18 @@ function App() {
 
   const checkBoard = (board) => {
     setBoard(board)
-    console.log(currentBoard);
   }
+  console.log(currentBoard);
 
   const checkCards = (card) => {
     setCards(card)
     console.log(cards);
   }
 
-// load board list
-  useEffect(() => {
-    axios.get(url)
-    .then((response) => {
-      setBoardList(response.data);
-    })
-    .catch((error) => {
-      console.log(error.data)
-    });
-  }, );
-
 // going through the boards to add them to the list
   const addBoardList = boardList.map((oneBoard, index) => {
       return (<p> 
-        <Board key={index+1} id={index+1} board ={oneBoard} current={checkBoard}/>
+        <Board key={index+1} id={index+1} board={oneBoard} current={checkBoard}/>
       </p>)
     })
 
@@ -76,7 +96,7 @@ function App() {
         <button className='Hide-board' onClick={hideBoard}> Hide Board</button>
       </div>
       <div className='Card-board'>
-      <NewCardForm />
+      <NewCardForm createNewCard={addCard}/>
       <button className="create-new-card">Create Card</button>
       </div>
       <div className='Display-board-list'> 
