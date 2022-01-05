@@ -8,12 +8,13 @@ const axios = require('axios');
 
 function CardList(props) {
     const [cardsDisplay, setCardsDisplay] = useState([]);
+    
     useEffect(() => {
         axios.get(`${props.url}/${props.currentBoard}/cards`)
         .then((response) => {
             setCardsDisplay(response.data)
         });
-    }, );
+    }, [cardsDisplay]);
     const allCards = cardsDisplay.map((card, index) => {
         if (card.board_id === props.currentBoard) {
         return (<div>
