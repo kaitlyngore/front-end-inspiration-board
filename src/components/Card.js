@@ -1,5 +1,4 @@
 import {useState} from 'react';
-// import './Card.css';
 import axios from 'axios';
 
 const Card = (props) => {

@@ -1,11 +1,8 @@
 import {React, useState} from 'react';
-// import './Card.css';
-// import axios from 'axios';
 
 const NewCardForm = (props) => {
     
     const [newCard, setNewCard] = useState({message: ''});
-    // const [createCardData, setCardData] = useState([]);
 
     const updateCard = (event) => {
         setNewCard({message: event.target.value});

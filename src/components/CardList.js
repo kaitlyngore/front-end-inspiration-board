@@ -11,7 +11,7 @@ function CardList(props) {
             setCardsDisplay(response.data)
         });
     }, [cardsDisplay]);
-    
+
     const allCards = cardsDisplay.map((card, index) => {
         if (card.board_id === props.currentBoard) {
         return (<div>
