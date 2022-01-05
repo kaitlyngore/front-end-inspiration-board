@@ -51,13 +51,6 @@
 .card:nth-of-type(1) {
   margin-right: 9%;
 }
-/* .card h2 {
-  color: snow;
-  margin-bottom: 1rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-} */
 .card p {
   color: snow;
   font-size: 1.1rem;
