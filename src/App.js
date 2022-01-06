@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
-import Card from './components/Card';
 import CardList from './components/CardList';
 import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
