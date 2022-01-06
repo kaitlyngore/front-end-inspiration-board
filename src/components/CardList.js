@@ -7,7 +7,7 @@ function CardList(props) {
     
     useEffect(() => {
         getCardList();
-    }, [cardsDisplay]);
+    }, []);
 
     const getCardList = () => {
         axios.get(`${props.url}/${props.currentBoard}/cards`)

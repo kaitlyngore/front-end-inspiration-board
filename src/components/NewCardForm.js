@@ -1,4 +1,5 @@
 import {React, useState} from 'react';
+import './Card.css'
 
 const NewCardForm = (props) => {
     
@@ -23,10 +24,17 @@ const NewCardForm = (props) => {
         <form onSubmit={submitCard}>
             <fieldset>
             <label>Card Message:</label>
-                {/* <input type="text" value={this.state.value} onChange={this.handleChange} className={(setNewCard.length === 0) || (setNewCard.length > 40)? 'invalid-input' : ''}/>
-            <input type="submit" value="Submit" disabled={((this.state.value.length === 0) || (this.state.value.length > 40))}/> */}
-                <input type="text" value={newCard.message} onChange={updateCard} minLength={1} maxLength={40} />
-            <input className="create-new-card" type="submit" value="Create Card" />
+                <input type="text" value={newCard.message} onChange={updateCard}  />
+                {/* minLength={1} maxLength={40} */}
+            <input className="create-new-card" type="submit" value="Create Card" disabled={((newCard.message.length === 0) || (newCard.message.length > 40))}/>
+            <span>
+                {newCard.message.length === 0 &&
+                    <p className="warning">Card message cannot be empty.</p>
+                }
+                {newCard.message.length > 40 &&
+                    <p className="warning">Card message needs to be less than 40 characters.</p>
+                }
+            </span>
             </fieldset>
         </form>
         </div>

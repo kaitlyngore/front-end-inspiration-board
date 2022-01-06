@@ -7,7 +7,7 @@ const Board = (props) => {
         const newSelected = {
             title: props.board.title,
             owner: props.board.owner,
-            board_id: props.id
+            id: props.board.id
         }
         props.current(newSelected);
     } 
