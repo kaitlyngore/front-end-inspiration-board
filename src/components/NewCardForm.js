@@ -1,4 +1,5 @@
 import {React, useState} from 'react';
+import './Card.css';
 
 const NewCardForm = (props) => {
     
@@ -14,9 +15,8 @@ const NewCardForm = (props) => {
         } else {
             event.preventDefault();
             props.createNewCard(newCard);
-            setNewCard("");
+            setNewCard({message: ''});
         }
-
     };
 
     return (
@@ -26,8 +26,16 @@ const NewCardForm = (props) => {
             <fieldset>
             <label>Card Message:</label>
                 <input type="text" value={newCard.message} onChange={updateCard} />
-            <input className="create-new-card" type="submit" value="Create Card" />
+            <input className="create-new-card" type="submit" value="Create Card" disabled={((newCard.message.length === 0) || (newCard.message.length > 40))}/>
             </fieldset>
+            <span>
+            {newCard.message.length === 0 &&
+                <p className="warning">Card message cannot be empty.</p>
+            }
+            {newCard.message.length > 40 &&
+                <p className="warning">Card message needs to be less than 40 characters.</p>
+            }
+            </span>
         </form>
         </div>
     )
