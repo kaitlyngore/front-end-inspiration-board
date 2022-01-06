@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Board from './components/Board';
 import NewBoardForm from './components/NewBoardForm';
+import Card from './components/Card';
 import CardList from './components/CardList';
 import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
 
 function App() {
-  const [currentBoard, setBoard] = useState({title: '', owner: '', id: 0});
+  const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: 0});
   const [boardList, setBoardList] = useState([]);
   const [cards, setCards] = useState({message: '', card_likes: null})
   const [boardDisplay, setBoardDisplay] = useState(true);
@@ -37,7 +38,7 @@ function App() {
     const newBoard = {
       title: boardInfo.title,
       owner: boardInfo.owner,
-      id: boardInfo.id +1
+      board_id: boardInfo.board_id +1
     }
     axios.post(url, newBoard)
     .then(function(response) {
@@ -46,7 +47,6 @@ function App() {
       console.log("response", response);
       getBoardListTest();
       console.log("after getboardlist function", currentBoard)
-
     })
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
@@ -108,11 +108,11 @@ function App() {
       </div>
       <div className="board"> 
       <h4>Let's Take A Look Inside...</h4>
-      {currentBoard.id? currentBoard.title: errorMessage}
+      {currentBoard.board_id? currentBoard.title: errorMessage}
       </div>
       <div className='Card-display'>
         <h3>Cards, Cards, Cards!</h3>
-        {currentBoard.id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
+        {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards}/></div>: errorMessage}
       </div>
     </div>
   );
