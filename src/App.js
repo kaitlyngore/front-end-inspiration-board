@@ -33,7 +33,7 @@ function App() {
   const onNewBoard = (boardInfo) => {
     if (!boardInfo.title || !boardInfo.owner) {
       alert('Missing Information!')
-    }else {
+    } else {
     const newBoard = {
       title: boardInfo.title,
       owner: boardInfo.owner,
@@ -41,9 +41,12 @@ function App() {
     }
     axios.post(url, newBoard)
     .then(function(response) {
-      setBoard(response.data)
-      console.log(response);
+      setBoard(response.data);
+      console.log("testing board", currentBoard)
+      console.log("response", response);
       getBoardListTest();
+      console.log("after getboardlist function", currentBoard)
+
     })
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
@@ -57,7 +60,9 @@ function App() {
 
   const checkBoard = (board) => {
     setBoard(board)
+    console.log("is this being called");
   }
+  
   console.log(currentBoard);
 
   const checkCards = (card) => {
@@ -71,7 +76,6 @@ function App() {
         <Board key={index+1} id={index+1} board={oneBoard} current={checkBoard}/>
       </p>)
     })
-
 
   const addCard = (card) => {
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.board_id}/cards`, card)

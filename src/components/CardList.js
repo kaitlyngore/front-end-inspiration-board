@@ -10,10 +10,16 @@ function CardList(props) {
     }, []);
 
     const getCardList = () => {
+        console.log("hit getCardList method")
         axios.get(`${props.url}/${props.currentBoard}/cards`)
         .then((response) => {
-            setCardsDisplay(response.data)
-        });
+            setCardsDisplay(response.data);
+            console.log("Get Card List");
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log(error.response);
+        })
     }
 
     const allCards = cardsDisplay.map((card, index) => {
