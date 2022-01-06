@@ -43,10 +43,7 @@ function App() {
     axios.post(url, newBoard)
     .then(function(response) {
       setBoard(response.data);
-      console.log("testing board", currentBoard)
-      console.log("response", response);
       getBoardListTest();
-      console.log("after getboardlist function", currentBoard)
     })
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
@@ -60,7 +57,6 @@ function App() {
 
   const checkBoard = (board) => {
     setBoard(board)
-    console.log("is this being called");
   }
   
   console.log(currentBoard);

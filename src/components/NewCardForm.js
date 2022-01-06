@@ -9,6 +9,9 @@ const NewCardForm = (props) => {
     };
 
     const submitCard = (event) => {
+        // if (newCard.message === '' && newCard.message > 40) {
+        //     alert("Message needs to be greater than 1 character or less than 40 characters")
+        // }
         event.preventDefault();
         props.createNewCard(newCard);
         setNewCard("");
