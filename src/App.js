@@ -31,6 +31,9 @@ function App() {
 
 // make new board
   const onNewBoard = (boardInfo) => {
+    if (!boardInfo.title || !boardInfo.owner) {
+      alert('Missing Information!')
+    } else {
     const newBoard = {
       title: boardInfo.title,
       owner: boardInfo.owner,
@@ -45,7 +48,7 @@ function App() {
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
     });
-  }
+  }}
 
   const addCard = (card) => {
     console.log(card, card.id)
