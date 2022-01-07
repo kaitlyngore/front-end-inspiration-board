@@ -8,7 +8,7 @@ const Card = (props) => {
         axios.patch(`${process.env.REACT_APP_BACKEND_URL}/cards/${props.card.id}/like`, cardLikes)
         .then((response) => {
             console.log("Liked!");
-            props.getCardList();
+            props.getCardList(props.currentBoard);
         })
         .catch((error) => {
             console.log(error);
@@ -20,6 +20,7 @@ const Card = (props) => {
         axios.delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${props.card.id}`)
         .then((response) => {
             console.log("Card successfully deleted");
+            props.getCardList(props.currentBoard);
         })
         .catch((error) => {
             console.log(error);

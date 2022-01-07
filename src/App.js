@@ -12,6 +12,7 @@ function App() {
   const [cards, setCards] = useState({message: '', card_likes: null})
   const [boardDisplay, setBoardDisplay] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const [cardsDisplay, setCardsDisplay] = useState([]);
   let url = process.env.REACT_APP_BACKEND_BOARDS;
 
     // load board list
@@ -37,12 +38,14 @@ function App() {
     const newBoard = {
       title: boardInfo.title,
       owner: boardInfo.owner,
+      // board_id: boardInfo.board_id +1
     }
     axios.post(url, newBoard)
     .then(function(response) {
       setBoard(response.data);
       console.log("response", currentBoard)
       getBoardListTest();
+      getCardList(response.data.id);
     })
     .catch(function(error) {
       console.log(setErrorMessage(error.data));
@@ -55,7 +58,8 @@ function App() {
   }
 
   const checkBoard = (board) => {
-    setBoard(board)
+    setBoard(board);
+    getCardList(board.board_id);
   }
   
   console.log(currentBoard);
@@ -67,20 +71,32 @@ function App() {
 
 // going through the boards to add them to the list
   const addBoardList = boardList.map((oneBoard, index) => {
-      return (<p> 
-        <Board key={index+1} id={index+1} board={oneBoard} current={checkBoard}/>
+      return (<p key={oneBoard.id}> 
+        <Board id={oneBoard.id} board={oneBoard} current={checkBoard}/>
       </p>)
     })
 
   const addCard = (card) => {
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.id}/cards`, card)
     .then((response) => {
-        console.log(response)
+        console.log(response);
+        getCardList(currentBoard.board_id);
     })
     .catch((error) => {
         console.log(error);
         console.log(error.response);
     })
+  }
+
+  const getCardList = (board_id) => {
+      axios.get(`${url}/${board_id}/cards`)
+      .then((response) => {
+          setCardsDisplay(response.data);
+      })
+      .catch((error) => {
+          console.log(error);
+          console.log(error.response);
+      })
   }
 
   return (
@@ -107,7 +123,7 @@ function App() {
       </div>
       <div className='Card-display'>
         <h3>Cards, Cards, Cards!</h3>
-        {currentBoard.id? <div><CardList url={url} currentBoard={currentBoard.id} cards={checkCards}/></div>: errorMessage}
+        {currentBoard.board_id? <div><CardList url={url} currentBoard={currentBoard.board_id} cards={checkCards} cardsDisplay={cardsDisplay} getCardList={getCardList}/></div>: errorMessage}
       </div>
     </div>
   );
