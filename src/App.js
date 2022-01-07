@@ -7,7 +7,7 @@ import NewCardForm from './components/NewCardForm';
 const axios = require('axios');
 
 function App() {
-  const [currentBoard, setBoard] = useState({title: '', owner: '', board_id: 0});
+  const [currentBoard, setBoard] = useState({title: '', owner: '', id: 0});
   const [boardList, setBoardList] = useState([]);
   const [cards, setCards] = useState({message: '', card_likes: null})
   const [boardDisplay, setBoardDisplay] = useState(true);
@@ -43,6 +43,7 @@ function App() {
     axios.post(url, newBoard)
     .then(function(response) {
       setBoard(response.data);
+      console.log("response", currentBoard)
       getBoardListTest();
       getCardList(response.data.id);
     })
@@ -76,7 +77,7 @@ function App() {
     })
 
   const addCard = (card) => {
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.board_id}/cards`, card)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/boards/${currentBoard.id}/cards`, card)
     .then((response) => {
         console.log(response);
         getCardList(currentBoard.board_id);
@@ -118,7 +119,7 @@ function App() {
       </div>
       <div className="board"> 
       <h4>Let's Take A Look Inside...</h4>
-      {currentBoard.board_id? currentBoard.title: errorMessage}
+      {currentBoard.id? currentBoard.title: errorMessage}
       </div>
       <div className='Card-display'>
         <h3>Cards, Cards, Cards!</h3>
